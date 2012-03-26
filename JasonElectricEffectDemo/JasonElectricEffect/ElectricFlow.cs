@@ -13,7 +13,7 @@ namespace JasonElectricEffect
         SpriteBatch _SpriteBatch = null;
         private List<Texture2D> Textures = null;
         private Texture2D CurrentTexture = null;
-        public TimeSpan LifeSpan = TimeSpan.Zero;
+        public TimeSpan LifeSpan = TimeSpan.FromSeconds(0.2);
         public TimeSpan Age = TimeSpan.Zero;
         public Color LineColor = Color.White;
         public int Density = 10;
@@ -29,11 +29,14 @@ namespace JasonElectricEffect
         /// <param name="spriteBatch"></param>
         /// <param name="textures"></param>
         /// <param name="lifeSpan"></param>
-        public ElectricFlow(SpriteBatch spriteBatch, List<Texture2D> textures, TimeSpan lifeSpan)
+        public ElectricFlow(SpriteBatch spriteBatch, List<Texture2D> textures, TimeSpan? lifeSpan = null)
         {
             _SpriteBatch = spriteBatch;
             Textures = textures;
-            LifeSpan = lifeSpan;
+            if (lifeSpan != null)
+            {
+                LifeSpan = (TimeSpan)lifeSpan;
+            }
 
             Reset();
         }
@@ -66,7 +69,7 @@ namespace JasonElectricEffect
                 return;
             }
 
-            VertexPositionColor[] points=null;
+            VertexPositionColor[] points = null;
             switch (EffectType)
             {
                 case ElectricEffectType.Line:

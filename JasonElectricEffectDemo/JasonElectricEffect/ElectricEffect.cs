@@ -55,13 +55,18 @@ namespace JasonElectricEffect
         /// </summary>
         /// <param name="lifeSpan"></param>
         /// <returns></returns>
-        public ElectricFlow AddFlow(TimeSpan lifeSpan)
+        public ElectricFlow AddFlow(TimeSpan? lifeSpan=null)
         {
             ElectricFlow flow = new ElectricFlow(_SpriteBatch, Textures,lifeSpan);
             flow.EffectType = this.EffectType;
             flow.Density = Density;
             this.ElectricFlows.Add(flow);
             return flow;
+        }
+
+        public void ClearFlows()
+        {
+            this.ElectricFlows.Clear();
         }
 
     }
